@@ -1,4 +1,4 @@
-import 'dart:async';
+// import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/countdown_timer_controller.dart';
@@ -14,37 +14,41 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   late CountdownTimerController controller;
-  int hr = DateTime.now().hour;
-  int min = DateTime.now().minute;
-  int sec = DateTime.now().second;
   int hrInput = 14;
   int minInput = 37;
   int secInput = 00;
   int displayhr = 14;
   int displaymin = 37;
   int displaysec = 00;
-  int days = 0;
-  // AudioPlayer audioInput = AudioPlayer();
+  int hr = DateTime.now().hour;
+  int min = DateTime.now().minute;
+  int sec = DateTime.now().second;
 
-  @override
-  Widget build(BuildContext context) {
+  int days = 0;
+  Duration? rem;
+  Duration remainingTime = Duration(hours: 0);
+  void initState() {
+    super.initState();
     DateTime currentDuration =
         DateTime.now().add(Duration(hours: hr, minutes: min, seconds: sec));
     //currentDuration to currentTime
     DateTime inputDuration = DateTime.now().add(Duration(
         days: days, hours: hrInput, minutes: minInput, seconds: secInput));
-    //inputDuration to selctedTime
-    // int remainingTime = inputDuration.inSeconds - currentDuration.inSeconds;
+    // int remainingTime = inputDuration - currentDuration.inSeconds;
+    // if(inputDuration.difference(currentDuration)){
+    remainingTime = inputDuration.difference(currentDuration);
+    // }
+  }
 
-    Duration remainingTime = inputDuration.difference(currentDuration);
-    // DateTimeRange remainingTime = DateTimeRange(start: inputDuration, end: currentDuration);
-
+  @override
+  Widget build(BuildContext context) {
     print('hey');
 
     // print(inputDuration.second +
     //     inputDuration.minute * 60 +
     //     inputDuration.hour * 60 * 60);
     // print(currentDuration.second);
+    // remainingTime=rem;
     print(remainingTime);
     // based on remainingTime.. (+ or -) resturn the scaffold
 
@@ -59,15 +63,14 @@ class _MyHomePageState extends State<MyHomePage> {
             // DateTime.now().millisecondsSinceEpoch + 9000,
             textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             onEnd: () {
-              print("hihr");
+              // print("hihr");
               setState(() {
                 // inputDuration.add(Duration(days: 1));
 
-                // days = (days + 1);
                 hrInput = 23;
-                secInput = 59;
                 minInput = 59;
-
+                secInput = 59;
+                remainingTime = Duration(hours: 23, minutes: 59, seconds: 59);
                 // days = days * 60 * 60 - (remainingTime.inSeconds);
                 // days = (days / 60) as int;
 
