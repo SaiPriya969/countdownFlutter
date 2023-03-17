@@ -13,34 +13,43 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   late CountdownTimerController controller;
-  int hr = DateTime.now().hour;
+   int hrInput = 14;
+  int minInput = 37;
+  int secInput = 00;
+  int displayhr = 14;
+  int displaymin = 37;
+  int displaysec = 00;
+     int hr = DateTime.now().hour;
   int min = DateTime.now().minute;
   int sec = DateTime.now().second;
-  int hrInput = 16;
-  int minInput = 6;
-  int secInput = 00;
-  int displayhr = 16;
-  int displaymin = 6;
-  int displaysec = 00;
-  int days = 0;
 
-  @override
-  Widget build(BuildContext context) {
+  int days = 0;
+Duration? rem;
+Duration remainingTime=Duration(hours: 0);
+void initState(){
+  super.initState();
     DateTime currentDuration =
         DateTime.now().add(Duration(hours: hr, minutes: min, seconds: sec));
     DateTime inputDuration = DateTime.now().add(Duration(
         days: days, hours: hrInput, minutes: minInput, seconds: secInput));
-    // int remainingtime = inputDuration.inSeconds - currentDuration.inSeconds;
-
-    Duration remainingtime = inputDuration.difference(currentDuration);
+    // int remainingTime = inputDuration - currentDuration.inSeconds;
+    // if(inputDuration.difference(currentDuration)){
+    remainingTime = inputDuration.difference(currentDuration);
+    // }
+}
+  @override
+  Widget build(BuildContext context) {
+  
+  
     print('hey');
 
     // print(inputDuration.second +
     //     inputDuration.minute * 60 +
     //     inputDuration.hour * 60 * 60);
     // print(currentDuration.second);
-    print(remainingtime);
-    // based on remainingtime.. (+ or -) resturn the scaffold
+    // remainingTime=rem;
+    print(remainingTime);
+    // based on remainingTime.. (+ or -) resturn the scaffold
 
     return Scaffold(
       body: Center(
@@ -49,17 +58,21 @@ class _MyHomePageState extends State<MyHomePage> {
           Text("target-${displayhr}:${displaymin}:${displaysec}"),
           CountdownTimer(
             endTime: DateTime.now().millisecondsSinceEpoch +
-                remainingtime.inSeconds * 1000,
+                remainingTime.inSeconds * 1000,
             // DateTime.now().millisecondsSinceEpoch + 9000,
             textStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             onEnd: () {
-              print("hihr");
+              
+              // print("hihr");
               setState(() {
                 // inputDuration.add(Duration(days: 1));
 
-                days = (days + 1);
-                days = days * 60 * 60 - (remainingtime.inSeconds);
-                days = (days / 60) as int;
+                hrInput = 23;
+                minInput=59;
+                secInput=59;
+                remainingTime=Duration(hours: 23,minutes: 59,seconds: 59);
+                // days = days * 60 * 60 - (remainingTime.inSeconds);
+                // days = (days / 60) as int;
 
                 // secInput = 0;
                 // hrInput = 24;
