@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter_countdown_timer/index.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, title});
+class CountdownTimerWidget extends StatefulWidget {
+  const CountdownTimerWidget({super.key, title});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<CountdownTimerWidget> createState() => _CountdownTimerWidgetState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _CountdownTimerWidgetState extends State<CountdownTimerWidget> {
   int targetHour = 12;
   int targetMinute = 35;
   int targetSecond = 00;
